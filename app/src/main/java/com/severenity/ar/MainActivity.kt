@@ -8,9 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import com.google.ar.core.Anchor
-import com.google.ar.core.HitResult
 import com.google.ar.core.Plane
-import com.google.ar.core.TrackingState
 import com.google.ar.sceneform.AnchorNode
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.ux.ArFragment
@@ -28,10 +26,6 @@ class MainActivity : AppCompatActivity() {
     private val CAMERA_REQUEST_CODE = 1
 
     private lateinit var arFragment: ArFragment
-
-    private val pointer = PointerDrawable()
-    private var isTracking: Boolean = false
-    private var isHitting: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
