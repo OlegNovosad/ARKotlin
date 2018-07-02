@@ -55,13 +55,6 @@ class RotatingNode : Node(), Node.OnTapListener {
         lastSpeedMultiplier = speedMultiplier
     }
 
-    /**
-     * Sets rotation speed
-     */
-    fun setDegreesPerSecond(degreesPerSecond: Float) {
-        this.degreesPerSecond = degreesPerSecond
-    }
-
     override fun onActivate() {
         startAnimation()
     }
