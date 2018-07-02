@@ -8,9 +8,14 @@ import com.google.ar.sceneform.math.Quaternion
 import com.google.ar.sceneform.math.QuaternionEvaluator
 import com.google.ar.sceneform.math.Vector3
 
+/**
+ * Class that performs rotating of the object displayed in the node.
+ * Uses property animation to make this node rotate
+ *
+ * @author Oleg Novosad
+ * @date 07/05/2018
+ */
 class RotatingNode : Node(), Node.OnTapListener {
-    // We'll use Property Animation to make this node rotate.
-
     private var rotationAnimation: ObjectAnimator? = null
     private var degreesPerSecond = 90.0f
 
@@ -50,7 +55,9 @@ class RotatingNode : Node(), Node.OnTapListener {
         lastSpeedMultiplier = speedMultiplier
     }
 
-    /** Sets rotation speed  */
+    /**
+     * Sets rotation speed
+     */
     fun setDegreesPerSecond(degreesPerSecond: Float) {
         this.degreesPerSecond = degreesPerSecond
     }
@@ -81,7 +88,11 @@ class RotatingNode : Node(), Node.OnTapListener {
         rotationAnimation = null
     }
 
-    /** Returns an ObjectAnimator that makes this node rotate.  */
+    /**
+     * Creates animator of the node
+     *
+     * @return an {@link ObjectAnimator} that makes this node rotate
+     */
     private fun createAnimator(): ObjectAnimator {
         // Node's setLocalRotation method accepts Quaternions as parameters.
         // First, set up orientations that will animate a circle.

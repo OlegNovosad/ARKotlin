@@ -6,20 +6,23 @@ import android.graphics.ColorFilter
 import android.graphics.Paint
 import android.graphics.drawable.Drawable
 
+/**
+ * Helper class to display pointer on the surface view of the camera
+ */
 class PointerDrawable: Drawable() {
     private val paint = Paint()
     var enabled = false
 
     override fun setAlpha(alpha: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented")
     }
 
     override fun getOpacity(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented")
     }
 
     override fun setColorFilter(colorFilter: ColorFilter?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented")
     }
 
     override fun draw(canvas: Canvas) {

@@ -17,7 +17,12 @@ import com.google.ar.sceneform.ux.ArFragment
 import com.google.ar.sceneform.ux.TransformableNode
 import kotlinx.android.synthetic.main.activity_main.*
 
-
+/**
+ * Sample code to display object within AR fragment
+ *
+ * @author Oleg Novosad
+ * @date 07/05/2018
+ */
 class MainActivity : AppCompatActivity() {
     private val TAG = "AR"
     private val CAMERA_REQUEST_CODE = 1
@@ -78,15 +83,12 @@ class MainActivity : AppCompatActivity() {
         fabAdd.setOnClickListener {
             addObject(R.raw.model)
         }
-
-//        arFragment.arSceneView.scene.setOnUpdateListener { frameTime ->
-//            arFragment.onUpdate(frameTime)
-//            onUpdate()
-//        }
     }
 
     /**
      * Add object by URI
+     *
+     * @param resourceId id of the object to be added
      */
     private fun addObject(resourceId: Int) {
         val frame = arFragment.arSceneView.arFrame
@@ -105,6 +107,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Display object on the scene
+     *
+     * @param fragment {@link ArFragment} containing AR scene
+     * @param createAnchor {@link Anchor} where object will be attached
+     * @param resourceId id of the resource for object to display
+     */
     private fun placeObject(fragment: ArFragment, createAnchor: Anchor, resourceId: Int) {
         ModelRenderable.builder()
                 .setSource(fragment.context, resourceId)
@@ -121,6 +130,13 @@ class MainActivity : AppCompatActivity() {
                 }
     }
 
+    /**
+     * Wraps object into nodes and displays it on fragment
+     *
+     * @param fragment {@link ArFragment} containing AR scene
+     * @param createAnchor {@link Anchor} where object will be attached
+     * @param renderable {@link ModelRenderable} object to be wrapped within node
+     */
     private fun addNodeToScene(fragment: ArFragment, createAnchor: Anchor, renderable: ModelRenderable) {
         val anchorNode = AnchorNode(createAnchor)
         val rotatingNode = RotatingNode()
@@ -135,59 +151,11 @@ class MainActivity : AppCompatActivity() {
         transformableNode.select()
     }
 
-    private fun onUpdate() {
-        val trackingChanged = updateTracking()
-        val contentView = findViewById<View>(android.R.id.content)
-        if (trackingChanged) {
-            if (isTracking) {
-                contentView.overlay.add(pointer)
-            } else {
-                contentView.overlay.remove(pointer)
-            }
-            contentView.invalidate()
-        }
-
-        if (isTracking) {
-            val hitTestChanged = updateHitTest()
-            if (hitTestChanged) {
-                pointer.enabled = isHitting
-                contentView.invalidate()
-            }
-        }
-    }
-
     /**
+     * Find screen center where object should be placed
      *
+     * @return center of the screen
      */
-    private fun updateTracking(): Boolean {
-        val frame = arFragment.arSceneView.arFrame
-        val wasTracking = isTracking
-        isTracking = frame.camera.trackingState === TrackingState.TRACKING
-        return isTracking != wasTracking
-    }
-
-    /**
-     *
-     */
-    private fun updateHitTest(): Boolean {
-        val frame = arFragment.arSceneView.arFrame
-        val pt = getScreenCenter()
-        val hits: List<HitResult>
-        val wasHitting = isHitting
-        isHitting = false
-        if (frame != null) {
-            hits = frame.hitTest(pt.x * 1.0f, pt.y * 1.0f)
-            for (hit in hits) {
-                val trackable = hit.trackable
-                if (trackable is Plane && trackable.isPoseInPolygon(hit.hitPose)) {
-                    isHitting = true
-                    break
-                }
-            }
-        }
-        return wasHitting != isHitting
-    }
-
     private fun getScreenCenter(): android.graphics.Point {
         val vw = findViewById<View>(android.R.id.content)
         return android.graphics.Point(vw.width / 2, vw.height / 2)

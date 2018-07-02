@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.severenity.ar">
-
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.severenity.ar">
     <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature android:name="android.hardware.camera.ar" android:required="true" />
@@ -23,5 +21,4 @@
 
         <meta-data android:name="com.google.ar.core" android:value="required" />
     </application>
-
 </manifest>
