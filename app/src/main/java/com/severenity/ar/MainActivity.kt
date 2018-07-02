@@ -22,8 +22,8 @@ import kotlinx.android.synthetic.main.activity_main.*
  * @date 07/05/2018
  */
 class MainActivity : AppCompatActivity() {
-    private val TAG = "AR"
-    private val CAMERA_REQUEST_CODE = 1
+    private val _tag = "AR"
+    private val _cameraRequestCode = 1
 
     private lateinit var arFragment: ArFragment
 
@@ -38,11 +38,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when (requestCode) {
-            CAMERA_REQUEST_CODE -> {
+            _cameraRequestCode -> {
                 if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Log.i(TAG, "Permission has been denied by user")
+                    Log.i(_tag, "Permission has been denied by user")
                 } else {
-                    Log.i(TAG, "Permission has been granted by user")
+                    Log.i(_tag, "Permission has been granted by user")
                     buildScene()
                 }
             }
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         val permission = checkSelfPermission(Manifest.permission.CAMERA)
 
         if (permission != PackageManager.PERMISSION_GRANTED) {
-            Log.i(TAG, "Permission to use camera denied.")
+            Log.i(_tag, "Permission to use camera denied.")
             makeRequest()
         } else {
             buildScene()
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
      * Request appropriate permissions
      */
     private fun makeRequest() {
-        requestPermissions(arrayOf(Manifest.permission.CAMERA), CAMERA_REQUEST_CODE)
+        requestPermissions(arrayOf(Manifest.permission.CAMERA), _cameraRequestCode)
     }
 
     /**
